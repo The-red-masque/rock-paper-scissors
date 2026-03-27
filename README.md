@@ -32,3 +32,4 @@ IF player wins:
 Display "Winning player wins."
 add 1 to that player's score.
 
+Display score
