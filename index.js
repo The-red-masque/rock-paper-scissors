@@ -2,46 +2,46 @@
 // Connection tested
 
 function getResult(humanChoice, computerChoice) {
-  let playerWin = "The player won.";
-  let playerLoss = "The player lost.";
-  let tie = "The player tied with the computer.";
-  let resultError = "There has been an error in the result checker.";
+  const playerWin = "The player won.";
+  const computerWin = "The player lost.";
+  const tie = "The player tied with the computer.";
+  const resultError = "There has been an error in the result checker.";
+  // Starting score of 0
+  let playerScore = 0;
+  let computerScore = 0;
+  const scoreString = `\nPlayer score: ${playerScore} Computer score: ${computerScore}`;
+
   // Checks for tie.
   if (humanChoice === computerChoice) {
     result = tie;
-    console.log(result);
-    alert(result);
+    console.log(result,scoreString,playerScore,computerScore);
     return result;
-  } // Check who won.
-    else if (humanChoice === "rock" && computerChoice === "paper") {
-    result = playerLoss;
-    console.log(result);
-    alert(result);
+  }
+     // Check who won.
+  else if (humanChoice === "rock" && computerChoice === "paper") {
+    result = computerWin;
+    computerScore++;
+    console.log(result,scoreString,playerScore,computerScore);
     return result;
   } else if (humanChoice === "rock" && computerChoice === "scissors") {
-    result = playerWin;
-    console.log(result);
-    alert(result);
+    result = playerWin; playerScore++;
+    console.log(result,scoreString,playerScore,computerScore);
     return result;
   } else if (humanChoice === "paper" && computerChoice === "scissors") {
-    result = playerLoss;
-    console.log(result);
-    alert(result);
+    result = computerWin; computerScore++;
+    console.log(result,scoreString,playerScore,computerScore);
     return result;
   } else if (humanChoice === "paper" && computerChoice === "rock") {
-    result = playerWin;
-    console.log(result);
-    alert(result);
+    result = playerWin; playerScore++;
+    console.log(result,scoreString,playerScore,computerScore);
     return result;
   } else if (humanChoice === "scissors" && computerChoice === "rock") {
-    result = playerLoss;
-    console.log(result);
-    alert(result);
+    result = computerWin; computerScore++;
+    console.log(result,scoreString,playerScore,computerScore);
     return result;
   } else if (humanChoice === "scissors" && computerChoice === "paper") {
-    result = playerWin;
-    console.log(result);
-    alert(result);
+    result = playerWin; playerScore++;
+    console.log(result,scoreString,playerScore,computerScore);
   } else {
     alert(resultError)
   }
@@ -93,8 +93,6 @@ function getHumanChoice() {
   }
 }
 
-//console.log(getHumanChoice());
-//console.log(getComputerChoice());
-getResult(getHumanChoice(), getComputerChoice());
-//alert(getResult());  // referenceError: Can't find computerChoice. Scoping might be the problem.
-//getHumanChoice
+//getScore()
+  getResult(getHumanChoice(), getComputerChoice())
+  // getScore();
