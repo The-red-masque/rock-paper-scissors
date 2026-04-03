@@ -1,24 +1,27 @@
 // The program that does the rock-paper-scissors
 
+// Starts multiple rounds.
 function multipleRounds() {
   // Starting counts
-  let round = 0;
   let playerScore = 0;
   let computerScore = 0;
-  // Template strings.
-  const roundTemplate = `Round: ${round}`;
-  const scoreTemplate = `Player score: ${playerScore} Computer score: ${computerScore}`;
+  let round = 1;
+  // Template string.
   do {
-    console.log(roundTemplate);
-    playRound();
-    console.log(scoreTemplate);
-  }
-  while (round < 5 );
+    // Formulas that don't change.
+      const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
+      const humanSelection = getHumanChoice();
+      const computerSelection = getComputerChoice();
+  
+      playRound(humanSelection, computerSelection);  // Displays who won.
+      console.log(resultTemplate);
+  }  while (round < 6)
 }
+
 
 // Function that runs when a tie is true.
 // Browser console displays: "Uncaught SyntaxError: missing ) after formal parameters."
-function Tie(result === "tie") { // ';' expected. Why is it expecting a semicolon here?  
+function Tie() { // ';' expected. Why is it expecting a semicolon here?  
   const tie = "You tied with the computer.";
   computerScore;
   playerScore;
@@ -29,7 +32,7 @@ function Tie(result === "tie") { // ';' expected. Why is it expecting a semicolo
 }
 
 // Function that triggers when a playerWin is True.
-function playerWin (result === "playerWin") {  // ';' expected. Why is it expecting a semicolon here?
+function playerWin () {  // ';' expected. Why is it expecting a semicolon here?
   const playerWin = "You won!";
   computerScore;
   playerScore++;
@@ -40,7 +43,7 @@ function playerWin (result === "playerWin") {  // ';' expected. Why is it expect
 }
 
 // Function that triggers when a computerWin is true.
-function computerWin (result === "computerWin") {  // ';' expected. Why is it expecting a semicolon here?
+function computerWin () {  // ';' expected. Why is it expecting a semicolon here?
   const computerWin = "You lost to the computer.";
   computerScore++;
   playerScore;
@@ -52,7 +55,7 @@ function computerWin (result === "computerWin") {  // ';' expected. Why is it ex
 }
 
 function playRound(humanChoice, computerChoice) {
-  let result ="";
+  let result = "";
   // Checks for tie.
   if (humanChoice === computerChoice) {
     result = "tie";
@@ -61,34 +64,34 @@ function playRound(humanChoice, computerChoice) {
   }
      // Check who won.
   else if (humanChoice === "rock" && computerChoice === "paper") {
-    result = "computerWin";
+    result = computerWin;
     console.log(result);
     return result;
   } else if (humanChoice === "rock" && computerChoice === "scissors") {
-    result = "playerWin";
+    result = playerWin;
     console.log(result);         // You won!
     return result;
   } else if (humanChoice === "paper" && computerChoice === "scissors") {
-    result = "computerWin";
+    result = computerWin;
     console.log(result);
     return result;
   } else if (humanChoice === "paper" && computerChoice === "rock") {
-    result = "playerWin";
+    result = playerWin;
     console.log(result);
     return result;
   } else if (humanChoice === "scissors" && computerChoice === "rock") {
-    result = "computerWin";
+    result = computerWin;
     console.log(result);
     return result;
   } else if (humanChoice === "scissors" && computerChoice === "paper") {
-    result = "playerWin"; 
+    result = playerWin; 
     console.log(result);
-}
-  do {
-    computerWin(result);
-    playerWin(result);
-    Tie(result);
-  } while (result)
+} do {
+  if (result === computerWin) {
+    computerWin();}
+   else if (result === playerWin){ playerWin();}
+    else {Tie();}
+  } while (result!=="")
 }
 
 function getComputerChoice() {
@@ -97,7 +100,7 @@ function getComputerChoice() {
   let computerChoice = Math.random();
   let computerChoiceError = "There has been an error in the getComputerChoice function.";
   // The if statement converts the RNG computerChoice to "rock","paper", or "scissors". 
-  if (computerChoice <= .33) {
+  if (0 > computerChoice <= .33) {
     computerChoice = "rock";
     console.log(computerChoice);
     return computerChoice;
@@ -117,25 +120,32 @@ function getComputerChoice() {
 
 function getHumanChoice() {
   // Prompt not defined when using nodejs ignore that.
-  let input = prompt("Which option do you choose \(Rock, Paper, or Scissors\)").toLowerCase();
+  // TypeError: can't access property "toLowerCase", prompt(...) is null.
+  let input = prompt("Which option do you chose \(Rock, Paper, or Scissors\)")
+  if (input !== null && input !== undefined) {
+    let lowercasedInput = input.toLowerCase();
+    return lowercasedInput;
+  }
   do {
-    if (input === "rock") {
+    if (lowercasedInput === "rock") {
       let humanChoice = "rock";
       console.log(humanChoice);
       return humanChoice;
-    } else if (input  === "paper") {
+    } else if (lowercasedInput  === "paper") {
       let humanChoice = "paper";
       console.log(humanChoice);
       return humanChoice;
-    } else {
+    } else if (lowercasedInput === "scissors") {
       let humanChoice = "scissors";
       console.log(humanChoice);
       return humanChoice;
     }
   } while (input === "rock"||"paper"||"scissors")
+  if (!(input === "rock"||"paper"||"scissors")) {
+    console.log("Not a valid input.");
+  }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
 multipleRounds();
+// Error on line 26, 93, 16, 150 computerScore is not being defined somehow
