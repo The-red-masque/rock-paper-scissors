@@ -1,90 +1,95 @@
 // The program that does the rock-paper-scissors
-// Connection tested
-// function scoreChanger() {
-  // let result = playRound(); // causes "Uncaught InternalError: too much recurssion."
-  // if (result === tie) {
-    // playerScore;
-    // computerScore;
-  // } else if (result === computerWin) {
-    // playerScore;
-    // computerScore++;
-  // } else if (result === playerWin) {
-    // playerScore++;
-    // computerScore;
-  // }
-// }
+
 function multipleRounds() {
-  // Starting info
+  // Starting counts
   let round = 0;
   let playerScore = 0;
   let computerScore = 0;
+  // Template strings.
   const roundTemplate = `Round: ${round}`;
   const scoreTemplate = `Player score: ${playerScore} Computer score: ${computerScore}`;
   do {
-    round++;
     console.log(roundTemplate);
-    playRound();//humanSelection, computerSelection);
+    playRound();
     console.log(scoreTemplate);
   }
   while (round < 5 );
 }
 
-function playRound(humanChoice, computerChoice) {
-  const playerWin = "You won!";
-  const computerWin = "You lost to the computer.";
+// Function that runs when a tie is true.
+// Browser console displays: "Uncaught SyntaxError: missing ) after formal parameters."
+function Tie(result === "tie") { // ';' expected. Why is it expecting a semicolon here?  
   const tie = "You tied with the computer.";
-  const resultError = "There has been an error in the result checker.";
-  // Starting score of 0
+  computerScore;
+  playerScore;
+  round++;
+  console.log(tie);
+  // This is more readable for me.
+  return {computerScore, playerScore, round};    
+}
+
+// Function that triggers when a playerWin is True.
+function playerWin (result === "playerWin") {  // ';' expected. Why is it expecting a semicolon here?
+  const playerWin = "You won!";
+  computerScore;
+  playerScore++;
+  round++;
+  console.log(playerWin);
+  // This is more readable for me.
+  return {computerScore, playerScore, round};
+}
+
+// Function that triggers when a computerWin is true.
+function computerWin (result === "computerWin") {  // ';' expected. Why is it expecting a semicolon here?
+  const computerWin = "You lost to the computer.";
+  computerScore++;
+  playerScore;
+  round++;
+  console.log(computerWin);
+  // This is more readable for me.
+  return {computerScore, playerScore, round};
   
+}
+
+function playRound(humanChoice, computerChoice) {
+  let result ="";
   // Checks for tie.
   if (humanChoice === computerChoice) {
-    result = tie;
-
+    result = "tie";
     console.log(result);         // You tied with the computer.
-
-      // Player score: 0 Computer score: 0
     return result;
   }
      // Check who won.
   else if (humanChoice === "rock" && computerChoice === "paper") {
-    result = computerWin;
-    
-    console.log(result);         // You lost to the computer!
-
-      // Player score: 0 Computer score: 1
+    result = "computerWin";
+    console.log(result);
     return result;
   } else if (humanChoice === "rock" && computerChoice === "scissors") {
-    result = playerWin;
-
+    result = "playerWin";
     console.log(result);         // You won!
     return result;
   } else if (humanChoice === "paper" && computerChoice === "scissors") {
-    result = computerWin;
-
+    result = "computerWin";
     console.log(result);
     return result;
   } else if (humanChoice === "paper" && computerChoice === "rock") {
-    result = playerWin;
-
+    result = "playerWin";
     console.log(result);
-
-    console.log(scoreTemplate);
     return result;
   } else if (humanChoice === "scissors" && computerChoice === "rock") {
-    result = computerWin;
+    result = "computerWin";
     console.log(result);
-
-
     return result;
   } else if (humanChoice === "scissors" && computerChoice === "paper") {
-    result = playerWin; 
+    result = "playerWin"; 
     console.log(result);
-
-
-  {
-    alert(resultError);
-  }
-}}
+}
+  do {
+    computerWin(result);
+    playerWin(result);
+    Tie(result);
+  } while (result)
+}
 
 function getComputerChoice() {
   /* Function should uses a semi-RNG to decide what the choice represents. */
@@ -111,10 +116,8 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  // Prompt not defined when using nodejs
+  // Prompt not defined when using nodejs ignore that.
   let input = prompt("Which option do you choose \(Rock, Paper, or Scissors\)").toLowerCase();
-  let inputError = "The player entered an invalid input for rock paper scissors.\nPlease only use \"Rock\", \"Paper\" or \"Scissors\".";
-  // Check that input is valid. If it isn't valid display inputError.
   do {
     if (input === "rock") {
       let humanChoice = "rock";
@@ -130,10 +133,6 @@ function getHumanChoice() {
       return humanChoice;
     }
   } while (input === "rock"||"paper"||"scissors")
-    if (!(input === "rock"||"paper"||"scissors")) {
-      console.log(inputError);
-      getHumanChoice();
-  }
 }
 
 const humanSelection = getHumanChoice();
