@@ -99,13 +99,13 @@ function getComputerChoice() {
   // What to display when there is an unexpected outcome.
   let computerChoiceUnexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
   // The if statement converts the RNG computerChoice to "rock","paper", or "scissors". 
-  if (0 >= computerChoice && computerChoice <= .33) {
+  if (computerChoice >= 0 && computerChoice <= .33) {
     computerChoice = "rock";
     return computerChoice;
-  } else if (.34 >= computerChoice && computerChoice <= .66) {
+  } else if (computerChoice >= .34 && computerChoice <= .66) {
     computerChoice = "paper";
     return computerChoice;
-  } else if (.67 >= computerChoice && computerChoice <= 1) {
+  } else if (computerChoice >= .67 && computerChoice <= 1) {
     computerChoice = "scissors";
     return computerChoice;
   } else {
@@ -116,27 +116,27 @@ function getComputerChoice() {
 }
 
 const computerSelection = getComputerChoice();
+
+function getHumanChoice() {
+  let input = prompt("Which option do you chose \(Rock, Paper, or Scissors\)").toLowerCase();
+
+  do {
+    if (input === "rock") {
+      let humanChoice = "rock";
+      return humanChoice;
+    } else if (input === "paper") {
+      let humanChoice = "paper";
+      return humanChoice;
+    } else if (input === "scissors") {
+      let humanChoice = "scissors";
+      return humanChoice;
+    }
+  } while (input === "rock" || "paper" || "scissors" && input !== null && input !== undefined)
+}
+
+const humanSelection = getHumanChoice();
+
+// displays choices:
+console.log(humanSelection);
 console.log(computerSelection);
-
-// function getHumanChoice() {
-// let input = prompt("Which option do you chose \(Rock, Paper, or Scissors\)").toLowerCase();
-
-// do {
-// if (input === "rock") {
-// let humanChoice = "rock";
-// console.log(humanChoice);
-// return humanChoice;
-// } else if (input  === "paper") {
-// let humanChoice = "paper";
-// console.log(humanChoice);
-// return humanChoice;
-// } else if (input === "scissors") {
-// let humanChoice = "scissors";
-// console.log(humanChoice);
-// return humanChoice;
-// }
-// } while (input === "rock"||"paper"||"scissors" && input !== null && input !== undefined) 
-// }
-
-// Trickle down error from computerScore is not defined.
 // multipleRounds();
