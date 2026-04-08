@@ -1,151 +1,142 @@
 // The program that does the rock-paper-scissors
 
+// javascript can't be normal and do if (0 > x < 1) {
+// console.log(why don't you logic like almost every other language I've tried.)}
+
 // Starts multiple rounds.
-function multipleRounds() {
-  // Starting counts
-  let playerScore = 0;
-  let computerScore = 0;
-  let round = 1;
-  // Template string.
-  do {
-    // Formulas that don't change.
-      const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
-      const humanSelection = getHumanChoice();
-      const computerSelection = getComputerChoice();
-  
-      playRound(humanSelection, computerSelection);  // Displays who won.
-      console.log(resultTemplate);
-  }  while (round < 6)
-}
+// function multipleRounds() {
+// Starting counts
+// let playerScore = 0;
+// let computerScore = 0;
+// let round = 1;
+// Template strings.
+// do {
+// Formulas that don't change.
+// const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
+// const humanSelection = getHumanChoice();
+// const computerSelection = getComputerChoice();
+
+// playRound(humanSelection, computerSelection);  // Displays who won.
+// console.log(resultTemplate);
+// }  while (round < 6)
+// }
 
 
-// Function that runs when a tie is true.
-// Browser console displays: "Uncaught SyntaxError: missing ) after formal parameters."
-function Tie() { // ';' expected. Why is it expecting a semicolon here?  
-  const tie = "You tied with the computer.";
-  computerScore;
-  playerScore;
-  round++;
-  console.log(tie);
-  // This is more readable for me.
-  return {computerScore, playerScore, round};    
-}
+// Function that should run when a tie is true.
+// function Tie() { 
+// const tie = "You tied with the computer.";
+// computerScore;
+// playerScore;
+// round++;
+// console.log(tie);
+// return {computerScore, playerScore, round};    
+// }
 
 // Function that triggers when a playerWin is True.
-function playerWin () {  // ';' expected. Why is it expecting a semicolon here?
-  const playerWin = "You won!";
-  computerScore;
-  playerScore++;
-  round++;
-  console.log(playerWin);
-  // This is more readable for me.
-  return {computerScore, playerScore, round};
-}
+// function playerWin () {  // Uncaught ReferenceError: computerScore is not defined.
+// const playerWin = "You won!";
+// computerScore;
+// playerScore++;
+// round++;
+// console.log(playerWin);
+// return {computerScore, playerScore, round};
+// }
 
 // Function that triggers when a computerWin is true.
-function computerWin () {  // ';' expected. Why is it expecting a semicolon here?
-  const computerWin = "You lost to the computer.";
-  computerScore++;
-  playerScore;
-  round++;
-  console.log(computerWin);
-  // This is more readable for me.
-  return {computerScore, playerScore, round};
-  
-}
+// function computerWin () {
+// const computerWin = "You lost to the computer.";
+// computerScore++;
+// playerScore;
+// round++;
+// console.log(computerWin);
+// return {computerScore, playerScore, round};
+// }
 
-function playRound(humanChoice, computerChoice) {
-  let result = "";
-  // Checks for tie.
-  if (humanChoice === computerChoice) {
-    result = "tie";
-    console.log(result);         // You tied with the computer.
-    return result;
-  }
-     // Check who won.
-  else if (humanChoice === "rock" && computerChoice === "paper") {
-    result = computerWin;
-    console.log(result);
-    return result;
-  } else if (humanChoice === "rock" && computerChoice === "scissors") {
-    result = playerWin;
-    console.log(result);         // You won!
-    return result;
-  } else if (humanChoice === "paper" && computerChoice === "scissors") {
-    result = computerWin;
-    console.log(result);
-    return result;
-  } else if (humanChoice === "paper" && computerChoice === "rock") {
-    result = playerWin;
-    console.log(result);
-    return result;
-  } else if (humanChoice === "scissors" && computerChoice === "rock") {
-    result = computerWin;
-    console.log(result);
-    return result;
-  } else if (humanChoice === "scissors" && computerChoice === "paper") {
-    result = playerWin; 
-    console.log(result);
-} do {
-  if (result === computerWin) {
-    computerWin();}
-   else if (result === playerWin){ playerWin();}
-    else {Tie();}
-  } while (result!=="")
-}
+// function playRound(humanChoice, computerChoice) {
+// let result = "";
+// Checks for tie.
+// if (humanChoice === computerChoice) {
+// result = Tie();
+// console.log(result);
+// return result;
+// }
+// Check who won.
+// else if (humanChoice === "rock" && computerChoice === "paper") {
+// result = computerWin();
+// console.log(result);
+// return result;
+// } else if (humanChoice === "rock" && computerChoice === "scissors") {
+// result = playerScore();
+// console.log(result);
+// return result;
+// } else if (humanChoice === "paper" && computerChoice === "scissors") {
+// result = computerWin();
+// console.log(result);
+// return result;
+// } else if (humanChoice === "paper" && computerChoice === "rock") {
+// result = playerWin();
+// console.log(result);
+// return result;
+// } else if (humanChoice === "scissors" && computerChoice === "rock") {
+// result = computerWin();
+// console.log(result);
+// return result;
+// } else if (humanChoice === "scissors" && computerChoice === "paper") {
+// result = playerWin(); 
+// console.log(result);
+// } else {
+// result = console.log("Error in playRound function.");
+// return result;
+// };
+// }
+
+// Function to get the semi-rng and return the computer's choice as a string of "rock", "paper", or "scissors".
+
 
 function getComputerChoice() {
-  /* Function should uses a semi-RNG to decide what the choice represents. */
-  // Computer's choice RNG
+  // Computer's choice semi-RNG
   let computerChoice = Math.random();
-  let computerChoiceError = "There has been an error in the getComputerChoice function.";
+  // What to display when there is an unexpected outcome.
+  let computerChoiceUnexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
   // The if statement converts the RNG computerChoice to "rock","paper", or "scissors". 
-  if (0 > computerChoice <= .33) {
+  if (0 >= computerChoice && computerChoice <= .33) {
     computerChoice = "rock";
-    console.log(computerChoice);
     return computerChoice;
-  } else if(.33 > computerChoice <= .66) {
+  } else if (.34 >= computerChoice && computerChoice <= .66) {
     computerChoice = "paper";
-    console.log(computerChoice);
     return computerChoice;
-  } else if (computerChoice > .66) {
+  } else if (.67 >= computerChoice && computerChoice <= 1) {
     computerChoice = "scissors";
-    console.log(computerChoice);
     return computerChoice;
   } else {
-    // Error checker
-    alert(computerChoiceError);
+    // Checks for unexpected outcomes.
+    // I only seem to get scissors or undefined as a result.
+    console.log(computerChoiceUnexpectedOutcome);
   }
 }
 
-function getHumanChoice() {
-  // Prompt not defined when using nodejs ignore that.
-  // TypeError: can't access property "toLowerCase", prompt(...) is null.
-  let input = prompt("Which option do you chose \(Rock, Paper, or Scissors\)")
-  if (input !== null && input !== undefined) {
-    let lowercasedInput = input.toLowerCase();
-    return lowercasedInput;
-  }
-  do {
-    if (lowercasedInput === "rock") {
-      let humanChoice = "rock";
-      console.log(humanChoice);
-      return humanChoice;
-    } else if (lowercasedInput  === "paper") {
-      let humanChoice = "paper";
-      console.log(humanChoice);
-      return humanChoice;
-    } else if (lowercasedInput === "scissors") {
-      let humanChoice = "scissors";
-      console.log(humanChoice);
-      return humanChoice;
-    }
-  } while (input === "rock"||"paper"||"scissors")
-  if (!(input === "rock"||"paper"||"scissors")) {
-    console.log("Not a valid input.");
-  }
-}
+const computerSelection = getComputerChoice();
+console.log(computerSelection);
 
+// function getHumanChoice() {
+// let input = prompt("Which option do you chose \(Rock, Paper, or Scissors\)").toLowerCase();
 
-multipleRounds();
-// Error on line 26, 93, 16, 150 computerScore is not being defined somehow
+// do {
+// if (input === "rock") {
+// let humanChoice = "rock";
+// console.log(humanChoice);
+// return humanChoice;
+// } else if (input  === "paper") {
+// let humanChoice = "paper";
+// console.log(humanChoice);
+// return humanChoice;
+// } else if (input === "scissors") {
+// let humanChoice = "scissors";
+// console.log(humanChoice);
+// return humanChoice;
+// }
+// } while (input === "rock"||"paper"||"scissors" && input !== null && input !== undefined) 
+// }
+
+// Trickle down error from computerScore is not defined.
+// multipleRounds();
