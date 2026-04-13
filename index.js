@@ -1,12 +1,10 @@
 // The program that does the rock-paper-scissors
 
-// Starts multiple rounds.
-// function multipleRounds() {
-  // Starting counts
-  let playerScore = 0;
-  let computerScore = 0;
-  let round = 1;
-  // Template strings.
+// Starting counts
+let playerScore = 0;
+let computerScore = 0;
+let round = 1;
+
   function gameOver() {
     const gameOver = "The game is over.";
     const leave = "You don't have to go home, but you can't stay here.";
@@ -26,35 +24,30 @@
   if (round >= 6) {
     gameOver();
   }
-// }
 
-
-// Function that should run when a tie is true.
 function Tie() {
   const tie = "You tied with the computer.";
-  computerScore; // No change
-  playerScore;  // No change
-  round++;  // Increases round counter.
+  computerScore;
+  playerScore;
+  round++;
   console.log(tie);
   return { computerScore, playerScore, round };
 }
 
-// Function that triggers when a playerWin is True.
-function playerWin() {  // Uncaught ReferenceError: computerScore is not defined.
+function playerWin() {
   const playerWin = "You won!";
-  computerScore;  // No change
-  playerScore++;  // Player score goes up.
-  round++;  // Increases round counter.
+  computerScore;
+  playerScore++;
+  round++;
   console.log(playerWin);
   return { computerScore, playerScore, round };
 }
 
-// Function that triggers when a computerWin is true.
 function computerWin() {
   const computerWin = "You lost to the computer.";
-  computerScore++;  // Computer score goes up.
-  playerScore;  // No change
-  round++;  // Increases round counter.
+  computerScore++;
+  playerScore;
+  round++;
   console.log(computerWin);
   return { computerScore, playerScore, round };
 }
@@ -92,16 +85,12 @@ function playRound(humanSelection, computerSelection) {
   }
 }
 
-// Function to get the semi-rng and return the computer's choice as a string of "rock", "paper", or "scissors".
+// Generates computer's choice.
 function getComputerChoice() {
   
-  // Computer's choice semi-RNG
   let computerChoice = Math.floor(Math.random() * 100);
-  
-  // What to display when there is an unexpected outcome.
   let computerChoiceUnexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
   
-  // The if statement converts the RNG computerChoice to "rock","paper", or "scissors". 
   if (computerChoice >= 0 && computerChoice <= 33) {
     computerChoice = "rock";
     console.log(computerChoice);
@@ -115,9 +104,6 @@ function getComputerChoice() {
     console.log(computerChoice);
     return computerChoice;
   } else {
-    // Checks for unexpected outcomes.
-    // Occasionally returns an undefined choice
-	  // Probably Math.random() going out of bounds.
 	  // TODO: See if there's something more elegant than (Math.floor(Math.random * 100))?
     return console.log(computerChoiceUnexpectedOutcome);
   }
@@ -142,6 +128,3 @@ function getHumanChoice() {
     }  // Checks for invalid result.
   } while (input === "rock" && input !== null && input !== undefined || input === "paper" && input !== null && input !== undefined || input === "scissors" && input !== null && input !== undefined)
 }
-// playRound(humanSelection, computerSelection);
-// displays choices:
-// multipleRounds();
