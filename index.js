@@ -7,6 +7,13 @@
   let computerScore = 0;
   let round = 1;
   // Template strings.
+  function gameOver() {
+    const gameOver = "The game is over.";
+    const leave = "You don't have to go home, but you can't stay here.";
+    console.log(gameOver);
+    console.log(leave);
+  }
+
   do {
     // Formulas that don't change.
     const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
@@ -16,6 +23,9 @@
     playRound(humanSelection, computerSelection);  // Displays who won.
     console.log(resultTemplate);
   } while (round < 6)
+  if (round >= 6) {
+    gameOver();
+  }
 // }
 
 
@@ -86,24 +96,29 @@ function playRound(humanSelection, computerSelection) {
 function getComputerChoice() {
   
   // Computer's choice semi-RNG
-  let computerChoice = Math.random();
+  let computerChoice = Math.floor(Math.random() * 100);
   
   // What to display when there is an unexpected outcome.
   let computerChoiceUnexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
   
   // The if statement converts the RNG computerChoice to "rock","paper", or "scissors". 
-  if (computerChoice >= 0 && computerChoice <= .33) {
+  if (computerChoice >= 0 && computerChoice <= 33) {
     computerChoice = "rock";
+    console.log(computerChoice);
     return computerChoice;
-  } else if (computerChoice >= .34 && computerChoice <= .66) {
+  } else if (computerChoice >= 34 && computerChoice <= 66) {
     computerChoice = "paper";
+    console.log(computerChoice);
     return computerChoice;
-  } else if (computerChoice >= .67 && computerChoice <= 1) {
+  } else if (computerChoice >= 67 && computerChoice <= 100) {
     computerChoice = "scissors";
+    console.log(computerChoice);
     return computerChoice;
   } else {
     // Checks for unexpected outcomes.
-    // Occasionally returns an undefined choice.
+    // Occasionally returns an undefined choice
+	  // Probably Math.random() going out of bounds.
+	  // TODO: See if there's something more elegant than (Math.floor(Math.random * 100))?
     return console.log(computerChoiceUnexpectedOutcome);
   }
 }
@@ -114,16 +129,19 @@ function getHumanChoice() {
   do {
     if (input === "rock") {
       let humanChoice = "rock";
+      console.log(humanChoice);
       return humanChoice;
     } else if (input === "paper") {
       let humanChoice = "paper";
+      console.log(humanChoice);
       return humanChoice;
     } else if (input === "scissors") {
       let humanChoice = "scissors";
+      console.log(humanChoice);
       return humanChoice;
-    }
+    }  // Checks for invalid result.
   } while (input === "rock" && input !== null && input !== undefined || input === "paper" && input !== null && input !== undefined || input === "scissors" && input !== null && input !== undefined)
 }
-playRound(humanSelection, computerSelection);
+// playRound(humanSelection, computerSelection);
 // displays choices:
 // multipleRounds();
