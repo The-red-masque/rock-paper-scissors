@@ -50,30 +50,38 @@ function computerWin() {
 }
 
 function playRound(humanSelection, computerSelection) {
+
+  const playerChoosesRock = humanSelection === "rock";
+  const playerChoosesScissors = humanSelection === "scissors";
+  const playerChoosesPaper = humanSelection === "paper";
+  const computerChoosesRock = computerSelection === "rock";
+  const computerChoosesScissors = computerSelection === "scissors";
+  const computerChoosesPaper = computerSelection === "paper";
+  const playerAndComputerChooseSame = humanSelection === computerSelection;
   let result = "";
   // Checks for tie.
-  if (humanSelection === computerSelection) {
+  if (playerAndComputerChooseSame) {
     result = Tie();
     console.log(result);
     return result;
   }
   // Check who won.
-  else if (humanSelection === "rock" && computerSelection === "paper") {
+  else if (playerChoosesRock && computerChoosesPaper) {
     result = computerWin();
     return result;
-  } else if (humanSelection === "rock" && computerSelection === "scissors") {
+  } else if (playerChoosesRock && computerChoosesScissors) {
     result = playerWin();
     return result;
-  } else if (humanSelection === "paper" && computerSelection === "scissors") {
+  } else if (playerChoosesPaper && computerChoosesScissors) {
     result = computerWin();
     return result;
-  } else if (humanSelection === "paper" && computerSelection === "rock") {
+  } else if (playerChoosesPaper && computerChoosesRock) {
     result = playerWin();
     return result;
-  } else if (humanSelection === "scissors" && computerSelection === "rock") {
+  } else if (playerChoosesScissors && computerChoosesRock) {
     result = computerWin();
     return result;
-  } else if (humanSelection === "scissors" && computerSelection === "paper") {
+  } else if (playerChoosesScissors && computerChoosesPaper) {
     result = playerWin();
   } else {
     // Error triggered.
@@ -89,22 +97,24 @@ function getComputerChoice() {
   let computerChoice = Math.random();
   
   // What to display when there is an unexpected outcome.
-  let computerChoiceUnexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
-  
+  const unexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
+  const computerChoosesRock = computerChoice >= 0 && computerChoice <= .33;
+  const computerChoosesScissors = computerChoice >= .67 && computerChoice <= 1;
+  const computerChoosesPaper = computerChoice >= .34 && computerChoice <= .66;
   // The if statement converts the RNG computerChoice to "rock","paper", or "scissors". 
-  if (computerChoice >= 0 && computerChoice <= .33) {
+  if (computerChoosesRock) {
     computerChoice = "rock";
     return computerChoice;
-  } else if (computerChoice >= .34 && computerChoice <= .66) {
+  } else if (computerChoosesPaper) {
     computerChoice = "paper";
     return computerChoice;
-  } else if (computerChoice >= .67 && computerChoice <= 1) {
+  } else if (computerChoosesScissors) {
     computerChoice = "scissors";
     return computerChoice;
   } else {
     // Checks for unexpected outcomes.
     // Occasionally returns an undefined choice.
-    return console.log(computerChoiceUnexpectedOutcome);
+    return console.log(unexpectedOutcome);
   }
 }
 
