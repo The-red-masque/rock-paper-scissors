@@ -1,17 +1,12 @@
 // The program that does the rock-paper-scissors
 
-// Starting counts
-let playerScore = 0;
-let computerScore = 0;
-let round = 1;
-
-  function gameOver() {
-    const gameOver = "The game is over.";
-    const leave = "You don't have to go home, but you can't stay here.";
-    console.log(gameOver);
-    console.log(leave);
-  }
-
+// Starts multiple rounds.
+// function multipleRounds() {
+  // Starting counts
+  let playerScore = 0;
+  let computerScore = 0;
+  let round = 1;
+  // Template strings.
   do {
     // Formulas that don't change.
     const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
@@ -21,33 +16,35 @@ let round = 1;
     playRound(humanSelection, computerSelection);  // Displays who won.
     console.log(resultTemplate);
   } while (round < 6)
-  if (round >= 6) {
-    gameOver();
-  }
+// }
 
+
+// Function that should run when a tie is true.
 function Tie() {
   const tie = "You tied with the computer.";
-  computerScore;
-  playerScore;
-  round++;
+  computerScore; // No change
+  playerScore;  // No change
+  round++;  // Increases round counter.
   console.log(tie);
   return { computerScore, playerScore, round };
 }
 
-function playerWin() {
+// Function that triggers when a playerWin is True.
+function playerWin() {  // Uncaught ReferenceError: computerScore is not defined.
   const playerWin = "You won!";
-  computerScore;
-  playerScore++;
-  round++;
+  computerScore;  // No change
+  playerScore++;  // Player score goes up.
+  round++;  // Increases round counter.
   console.log(playerWin);
   return { computerScore, playerScore, round };
 }
 
+// Function that triggers when a computerWin is true.
 function computerWin() {
   const computerWin = "You lost to the computer.";
-  computerScore++;
-  playerScore;
-  round++;
+  computerScore++;  // Computer score goes up.
+  playerScore;  // No change
+  round++;  // Increases round counter.
   console.log(computerWin);
   return { computerScore, playerScore, round };
 }
@@ -93,10 +90,9 @@ function playRound(humanSelection, computerSelection) {
   }
 }
 
-// Generates computer's choice.
+// Function to get the semi-rng and return the computer's choice as a string of "rock", "paper", or "scissors".
 function getComputerChoice() {
   
-<<<<<<< HEAD
   // Computer's choice semi-RNG
   let computerChoice = Math.random();
   
@@ -107,59 +103,39 @@ function getComputerChoice() {
   const computerChoosesPaper = computerChoice >= .34 && computerChoice <= .66;
   // The if statement converts the RNG computerChoice to "rock","paper", or "scissors". 
   if (computerChoosesRock) {
-=======
-  let computerChoice = Math.floor(Math.random() * 100);
-  let computerChoiceUnexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
-  
-  if (computerChoice >= 0 && computerChoice <= 33) {
->>>>>>> e46a0926d7ad7a16673a2910c4330391af6aecd4
     computerChoice = "rock";
-    console.log(computerChoice);
     return computerChoice;
-<<<<<<< HEAD
   } else if (computerChoosesPaper) {
-=======
-  } else if (computerChoice >= 34 && computerChoice <= 66) {
->>>>>>> e46a0926d7ad7a16673a2910c4330391af6aecd4
     computerChoice = "paper";
-    console.log(computerChoice);
     return computerChoice;
-<<<<<<< HEAD
   } else if (computerChoosesScissors) {
-=======
-  } else if (computerChoice >= 67 && computerChoice <= 100) {
->>>>>>> e46a0926d7ad7a16673a2910c4330391af6aecd4
     computerChoice = "scissors";
-    console.log(computerChoice);
     return computerChoice;
   } else {
-<<<<<<< HEAD
     // Checks for unexpected outcomes.
-    // Occasionally returns an undefined choice.
     return console.log(unexpectedOutcome);
-=======
-	  // TODO: See if there's something more elegant than (Math.floor(Math.random * 100))?
-    return console.log(computerChoiceUnexpectedOutcome);
->>>>>>> e46a0926d7ad7a16673a2910c4330391af6aecd4
   }
 }
 
 function getHumanChoice() {
   let input = prompt("Which option do you chose \(Rock, Paper, or Scissors\)").toLowerCase();
+  const inputIsRock = input === "rock";
+  const inputIsPaper = input === "paper";
+  const inputIsScissors = input === "scissors";
 
+  const inputIsValid = input !== null && input !== undefined;
+  
   do {
-    if (input === "rock") {
+    if (inputIsRock) {
       let humanChoice = "rock";
-      console.log(humanChoice);
       return humanChoice;
-    } else if (input === "paper") {
+    } else if (inputIsPaper) {
       let humanChoice = "paper";
-      console.log(humanChoice);
       return humanChoice;
-    } else if (input === "scissors") {
+    } else if (inputIsScissors) {
       let humanChoice = "scissors";
-      console.log(humanChoice);
       return humanChoice;
-    }  // Checks for invalid result.
-  } while (input === "rock" && input !== null && input !== undefined || input === "paper" && input !== null && input !== undefined || input === "scissors" && input !== null && input !== undefined)
+    }
+  } while ( inputIsRock && inputIsValid  || inputIsPaper && inputIsValid || inputIsScissors && inputIsValid )
 }
+playRound(humanSelection, computerSelection);
