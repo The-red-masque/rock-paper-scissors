@@ -1,12 +1,23 @@
 // The program that does the rock-paper-scissors
 
-// Starts multiple rounds.
 // function multipleRounds() {
   // Starting counts
   let playerScore = 0;
   let computerScore = 0;
   let round = 1;
-  // Template strings.
+  // Creating buttons in DOM
+  const btnDiv = document.createElement("div");
+    const rockBtn = document.createElement("BUTTON");
+    rockBtn.textContent = "Rock";
+    btnDiv.appendChild(rockBtn);
+    const paperBtn = document.createElement("BUTTON");
+    paperBtn.textContent = "Paper";
+    btnDiv.appendChild(paperBtn);
+    const scissorsBtn = document.createElement("BUTTON");
+    scissorsBtn.textContent = "Scissors";
+    btnDiv.appendChild(scissorsBtn);
+  document.body.appendChild(btnDiv);
+
   do {
     // Formulas that don't change.
     const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
@@ -15,7 +26,7 @@
 
     playRound(humanSelection, computerSelection);  // Displays who won.
     console.log(resultTemplate);
-  } while (round < 6)
+  } while (playerScore < 6)
 // }
 
 
