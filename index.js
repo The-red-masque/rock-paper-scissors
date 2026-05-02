@@ -1,33 +1,39 @@
 // The program that does the rock-paper-scissors
 
-// function multipleRounds() {
-  // Starting counts
-  let playerScore = 0;
-  let computerScore = 0;
-  let round = 1;
-  // Creating buttons in DOM
-  const btnDiv = document.createElement("div");
-    const rockBtn = document.createElement("BUTTON");
-    rockBtn.textContent = "Rock";
-    btnDiv.appendChild(rockBtn);
-    const paperBtn = document.createElement("BUTTON");
-    paperBtn.textContent = "Paper";
-    btnDiv.appendChild(paperBtn);
-    const scissorsBtn = document.createElement("BUTTON");
-    scissorsBtn.textContent = "Scissors";
-    btnDiv.appendChild(scissorsBtn);
-  document.body.appendChild(btnDiv);
+// Starting counts
+let playerScore = 0;
+let computerScore = 0;
+let round = 1;
+  
+  // Creating button choices in DOM
+const btnDiv = document.createElement("div");
+  const rockBtn = document.createElement("BUTTON");
+  rockBtn.textContent = "Rock";
+  btnDiv.appendChild(rockBtn);
+  const paperBtn = document.createElement("BUTTON");
+  paperBtn.textContent = "Paper";
+  btnDiv.appendChild(paperBtn);
+  const scissorsBtn = document.createElement("BUTTON");
+  scissorsBtn.textContent = "Scissors";
+  btnDiv.appendChild(scissorsBtn);
+document.body.appendChild(btnDiv);
 
-  do {
+  // Logs a button was clicked.
+// rockBtn.addEventListener("click", function(){let humanChoice = "rock"});
+// paperBtn.addEventListener("click", function(){let humanChoice = "paper"});
+// scissorsBtn.addEventListener("click", function(){let humanChoice = "scissors"});
+const roundLimit = round < 50
+const playerScoreLimit = playerScore < 6
+/*do {
     // Formulas that don't change.
     const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
     const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
+    
 
-    playRound(humanSelection, computerSelection);  // Displays who won.
+    //playRound(humanSelection, computerSelection);  // Displays who won.
     console.log(resultTemplate);
-  } while (playerScore < 6)
-// }
+  } while (playerScoreLimit && round < 50)*/  // && round < 50 to limit while debugging.
+
 
 
 // Function that should run when a tie is true.
@@ -94,6 +100,7 @@ function playRound(humanSelection, computerSelection) {
     return result;
   } else if (playerChoosesScissors && computerChoosesPaper) {
     result = playerWin();
+    return result;
   } else {
     // Error triggered.
     result = console.log("Error in playRound function.");
@@ -101,7 +108,6 @@ function playRound(humanSelection, computerSelection) {
   }
 }
 
-// Function to get the semi-rng and return the computer's choice as a string of "rock", "paper", or "scissors".
 function getComputerChoice() {
   
   // Computer's choice semi-RNG
@@ -112,7 +118,7 @@ function getComputerChoice() {
   const computerChoosesRock = computerChoice >= 0 && computerChoice <= .33;
   const computerChoosesScissors = computerChoice >= .67 && computerChoice <= 1;
   const computerChoosesPaper = computerChoice >= .34 && computerChoice <= .66;
-  // The if statement converts the RNG computerChoice to "rock","paper", or "scissors". 
+
   if (computerChoosesRock) {
     computerChoice = "rock";
     return computerChoice;
@@ -125,28 +131,13 @@ function getComputerChoice() {
   } else {
     // Checks for unexpected outcomes.
     return console.log(unexpectedOutcome);
+    //break;
   }
 }
+do {  
+  const computerSelection = getComputerChoice();
 
-function getHumanChoice() {
-  let input = prompt("Which option do you chose \(Rock, Paper, or Scissors\)").toLowerCase();
-  const inputIsRock = input === "rock";
-  const inputIsPaper = input === "paper";
-  const inputIsScissors = input === "scissors";
+  rockBtn.addEventListener("click", function() {playRound( humanSelection = "rock",computerSelection )});
+  paperBtn.addEventListener("click", function() {playRound( humanSelection = "paper", computerSelection );});
+  scissorsBtn.addEventListener("click", function() {playRound( humanSelection = "scissors", computerSelection );});} while (playerScoreLimit);
 
-  const inputIsValid = input !== null && input !== undefined;
-  
-  do {
-    if (inputIsRock) {
-      let humanChoice = "rock";
-      return humanChoice;
-    } else if (inputIsPaper) {
-      let humanChoice = "paper";
-      return humanChoice;
-    } else if (inputIsScissors) {
-      let humanChoice = "scissors";
-      return humanChoice;
-    }
-  } while ( inputIsRock && inputIsValid  || inputIsPaper && inputIsValid || inputIsScissors && inputIsValid )
-}
-playRound(humanSelection, computerSelection);
