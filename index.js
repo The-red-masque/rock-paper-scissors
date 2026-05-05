@@ -66,8 +66,8 @@ function computerWin() {
   return { computerScore, playerScore, round };
 }
 
-function playRound(humanSelection, computerSelection) {
-
+function playRound(humanSelection) {
+  const computerSelection = getComputerChoice();
   const playerChoosesRock = humanSelection === "rock";
   const playerChoosesScissors = humanSelection === "scissors";
   const playerChoosesPaper = humanSelection === "paper";
@@ -110,34 +110,34 @@ function playRound(humanSelection, computerSelection) {
 
 function getComputerChoice() {
   
-  // Computer's choice semi-RNG
-  let computerChoice = Math.random();
+  // Produces a randomish percentage in decimal.
+  const computerChoice = Math.round(Math.random() * 100) + 1;
   
   // What to display when there is an unexpected outcome.
   const unexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
-  const computerChoosesRock = computerChoice >= 0 && computerChoice <= .33;
-  const computerChoosesScissors = computerChoice >= .67 && computerChoice <= 1;
-  const computerChoosesPaper = computerChoice >= .34 && computerChoice <= .66;
+  const computerChoosesRock = computerChoice >= 1 && computerChoice <= 33;
+  const computerChoosesPaper = computerChoice >= 34 && computerChoice <= 66;
+  const computerChoosesScissors = computerChoice >= 67 && computerChoice <= 100;
 
   if (computerChoosesRock) {
-    computerChoice = "rock";
-    return computerChoice;
+    computerSelects = "rock";
+    return computerSelects;
   } else if (computerChoosesPaper) {
-    computerChoice = "paper";
-    return computerChoice;
+    computerSelects = "paper";
+    return computerSelects;
   } else if (computerChoosesScissors) {
-    computerChoice = "scissors";
-    return computerChoice;
+    computerSelects = "scissors";
+    return computerSelects;
   } else {
     // Checks for unexpected outcomes.
     return console.log(unexpectedOutcome);
     //break;
   }
 }
-do {  
-  const computerSelection = getComputerChoice();
 
+do {  
   rockBtn.addEventListener("click", function() {playRound( humanSelection = "rock",computerSelection )});
   paperBtn.addEventListener("click", function() {playRound( humanSelection = "paper", computerSelection );});
-  scissorsBtn.addEventListener("click", function() {playRound( humanSelection = "scissors", computerSelection );});} while (playerScoreLimit);
+  scissorsBtn.addEventListener("click", function() {playRound( humanSelection = "scissors", computerSelection );});
+} while (playerScoreLimit);
 
