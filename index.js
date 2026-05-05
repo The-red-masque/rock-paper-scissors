@@ -18,23 +18,9 @@ const btnDiv = document.createElement("div");
   btnDiv.appendChild(scissorsBtn);
 document.body.appendChild(btnDiv);
 
-  // Logs a button was clicked.
-// rockBtn.addEventListener("click", function(){let humanChoice = "rock"});
-// paperBtn.addEventListener("click", function(){let humanChoice = "paper"});
-// scissorsBtn.addEventListener("click", function(){let humanChoice = "scissors"});
-const roundLimit = round < 50
+const resultDiv = document.createElement("div");
+const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
 const playerScoreLimit = playerScore < 6
-/*do {
-    // Formulas that don't change.
-    const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
-    const humanSelection = getHumanChoice();
-    
-
-    //playRound(humanSelection, computerSelection);  // Displays who won.
-    console.log(resultTemplate);
-  } while (playerScoreLimit && round < 50)*/  // && round < 50 to limit while debugging.
-
-
 
 // Function that should run when a tie is true.
 function Tie() {
@@ -67,16 +53,22 @@ function computerWin() {
 }
 
 function playRound(humanSelection) {
+
   const computerSelection = getComputerChoice();
+  // const humanSelection = getHumanChoice();
   const playerChoosesRock = humanSelection === "rock";
   const playerChoosesScissors = humanSelection === "scissors";
   const playerChoosesPaper = humanSelection === "paper";
+  
   const computerChoosesRock = computerSelection === "rock";
   const computerChoosesScissors = computerSelection === "scissors";
   const computerChoosesPaper = computerSelection === "paper";
+  
   const playerAndComputerChooseSame = humanSelection === computerSelection;
+  
   let result = "";
   // Checks for tie.
+  
   if (playerAndComputerChooseSame) {
     result = Tie();
     console.log(result);
@@ -135,9 +127,6 @@ function getComputerChoice() {
   }
 }
 
-do {  
-  rockBtn.addEventListener("click", function() {playRound( humanSelection = "rock",computerSelection )});
-  paperBtn.addEventListener("click", function() {playRound( humanSelection = "paper", computerSelection );});
-  scissorsBtn.addEventListener("click", function() {playRound( humanSelection = "scissors", computerSelection );});
-} while (playerScoreLimit);
-
+rockBtn.addEventListener("click", function() {playRound( humanSelection = "rock" )});
+paperBtn.addEventListener("click", function() {playRound( humanSelection = "paper" );});
+scissorsBtn.addEventListener("click", function() {playRound( humanSelection = "scissors" );});
