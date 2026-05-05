@@ -3,33 +3,41 @@
 // Starting counts
 let playerScore = 0;
 let computerScore = 0;
-let round = 1;
-  
-  // Creating button choices in DOM
+let round = 0;
+let message = "";
+
+// Creates button choices in DOM
 const btnDiv = document.createElement("div");
   const rockBtn = document.createElement("BUTTON");
-  rockBtn.textContent = "Rock";
+    rockBtn.textContent = "Rock";
   btnDiv.appendChild(rockBtn);
   const paperBtn = document.createElement("BUTTON");
-  paperBtn.textContent = "Paper";
+    paperBtn.textContent = "Paper";
   btnDiv.appendChild(paperBtn);
   const scissorsBtn = document.createElement("BUTTON");
-  scissorsBtn.textContent = "Scissors";
+    scissorsBtn.textContent = "Scissors";
   btnDiv.appendChild(scissorsBtn);
 document.body.appendChild(btnDiv);
 
+// Creates div to display results.
 const resultDiv = document.createElement("div");
-const resultTemplate = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
+  const resultP = document.createElement("p");
+    resultP.textContent = `Result: ${message}`;
+  resultDiv.appendChild(resultP);
+  const scoreBoard = document.createElement("p");
+    scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
+  resultDiv.appendChild(scoreBoard);
+document.body.appendChild(resultDiv);
+
 const playerScoreLimit = playerScore < 6
 
 // Function that should run when a tie is true.
 function Tie() {
   const tie = "You tied with the computer.";
-  computerScore; // No change
-  playerScore;  // No change
-  round++;  // Increases round counter.
-  console.log(tie);
-  return { computerScore, playerScore, round };
+  computerScore;
+  playerScore;
+  resultP.textContent = `Result: ${tie}`;
+  return { computerScore, playerScore };
 }
 
 // Function that triggers when a playerWin is True.
@@ -37,9 +45,8 @@ function playerWin() {  // Uncaught ReferenceError: computerScore is not defined
   const playerWin = "You won!";
   computerScore;  // No change
   playerScore++;  // Player score goes up.
-  round++;  // Increases round counter.
-  console.log(playerWin);
-  return { computerScore, playerScore, round };
+  resultP.textContent = `Result: ${playerWin}`;
+  return { computerScore, playerScore};
 }
 
 // Function that triggers when a computerWin is true.
@@ -47,15 +54,14 @@ function computerWin() {
   const computerWin = "You lost to the computer.";
   computerScore++;  // Computer score goes up.
   playerScore;  // No change
-  round++;  // Increases round counter.
-  console.log(computerWin);
-  return { computerScore, playerScore, round };
+  resultP.textContent = `Result: ${computerWin}`;
+  return { computerScore, playerScore };
 }
 
 function playRound(humanSelection) {
 
   const computerSelection = getComputerChoice();
-  // const humanSelection = getHumanChoice();
+
   const playerChoosesRock = humanSelection === "rock";
   const playerChoosesScissors = humanSelection === "scissors";
   const playerChoosesPaper = humanSelection === "paper";
@@ -65,13 +71,12 @@ function playRound(humanSelection) {
   const computerChoosesPaper = computerSelection === "paper";
   
   const playerAndComputerChooseSame = humanSelection === computerSelection;
-  
+  round++;
   let result = "";
   // Checks for tie.
   
   if (playerAndComputerChooseSame) {
     result = Tie();
-    console.log(result);
     return result;
   }
   // Check who won.
