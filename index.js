@@ -54,7 +54,6 @@ function decideWinner( computerScore, playerScore ) {
   btnDiv.style.pointerEvents = 'none';
 }
 
-// Function that runs when a tie is true.
 function Tie() {
   const tie = "You tied with the computer.";
   round++;
@@ -67,14 +66,13 @@ function Tie() {
   document.body.appendChild(resultDiv);
 }
 
-// Function that triggers when a playerWin is True.
 function playerWin() {
   const playerWin = "You won!";
   playerScore++;
   round++;
 
   // Update display
-  scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;  // Player score goes up.
+  scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
   resultP.textContent = `Result: ${playerWin}`;
   resultDiv.appendChild(resultP);
   resultDiv.appendChild(scoreBoard);
@@ -83,10 +81,10 @@ function playerWin() {
   const playerScoreLimit = playerScore >= 5
   if (playerScoreLimit) {decideWinner(computerScore, playerScore);}
 }
-// Function that triggers when a computerWin is true.
+
 function computerWin() {
   const computerWin = "You lost to the computer.";
-  computerScore++;  // Computer score goes up.
+  computerScore++;
   round++;
 
   // Update display
@@ -143,14 +141,12 @@ function playRound(humanSelection) {
 
 function getComputerChoice() {
   
-  // Produces a randomish percentage in decimal.
   const computerChoice = Math.round(Math.random() * 100) + 1;
   
-  // What to display when there is an unexpected outcome.
   const unexpectedOutcome = "There has been an unexpected outcome in the getComputerChoice function.";
   const computerChoosesRock = computerChoice >= 1 && computerChoice <= 33;
   const computerChoosesPaper = computerChoice >= 34 && computerChoice <= 66;
-  const computerChoosesScissors = computerChoice >= 67 && computerChoice <= 100;
+  const computerChoosesScissors = computerChoice >= 67 && computerChoice <= 101;
   
   let computerSelects = "";
   
@@ -164,9 +160,8 @@ function getComputerChoice() {
     computerSelects = "scissors";
     return computerSelects;
   } else {
-    // Checks for unexpected outcomes.
-    return console.log(unexpectedOutcome);
-    //break;
+    computerSelects = unexpectedOutcome;
+    return computerSelects;
   }
 }
 
