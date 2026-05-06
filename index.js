@@ -29,33 +29,40 @@ const resultDiv = document.createElement("div");
   resultDiv.appendChild(scoreBoard);
 document.body.appendChild(resultDiv);
 
-const playerScoreLimit = playerScore < 6
+function decideWinner( computerScore, playerScore ) {
+  if (computerScore > playerScore) {
+    resultP.textContent = 'The computer has won!';
+  } else if (computerScore < playerScore) {
+    resultP.textContent = 'The player has won!';
+  } else if (computerScore === playerScore) {
+    resultP.textContent = 'The player and computer have tied.';
+  }
+}
 
 // Function that should run when a tie is true.
 function Tie() {
   const tie = "You tied with the computer.";
-  computerScore;
-  playerScore;
+  scoreBoard.textContent = `Round: ${round++} Player score: ${playerScore} Computer score: ${computerScore}`;
   resultP.textContent = `Result: ${tie}`;
-  return { computerScore, playerScore };
+  return;
 }
+// Move to inside playRound or playerWin.
+// const declareWinner = decideWinner( computerScore, playerScore );
 
 // Function that triggers when a playerWin is True.
-function playerWin() {  // Uncaught ReferenceError: computerScore is not defined.
+function playerWin() {
   const playerWin = "You won!";
-  computerScore;  // No change
-  playerScore++;  // Player score goes up.
+  scoreBoard.textContent = `Round: ${round++} Player score: ${playerScore++} Computer score: ${computerScore}`;  // Player score goes up.
   resultP.textContent = `Result: ${playerWin}`;
-  return { computerScore, playerScore};
-}
+  return playerScore };
 
 // Function that triggers when a computerWin is true.
 function computerWin() {
   const computerWin = "You lost to the computer.";
   computerScore++;  // Computer score goes up.
-  playerScore;  // No change
+  scoreBoard.textContent = `Round: ${round++} Player score: ${playerScore} Computer score: ${computerScore++}`;
   resultP.textContent = `Result: ${computerWin}`;
-  return { computerScore, playerScore };
+  return { computerScore };
 }
 
 function playRound(humanSelection) {
@@ -71,11 +78,12 @@ function playRound(humanSelection) {
   const computerChoosesPaper = computerSelection === "paper";
   
   const playerAndComputerChooseSame = humanSelection === computerSelection;
-  round++;
   let result = "";
   // Checks for tie.
-  
-  if (playerAndComputerChooseSame) {
+  if (playerScore >= 5) {
+    decideWinner(computerScore, playerScore);
+  }
+  else if (playerAndComputerChooseSame) {
     result = Tie();
     return result;
   }
@@ -98,8 +106,7 @@ function playRound(humanSelection) {
   } else if (playerChoosesScissors && computerChoosesPaper) {
     result = playerWin();
     return result;
-  } else {
-    // Error triggered.
+  } else {// Error triggered.
     result = console.log("Error in playRound function.");
     return result;
   }
@@ -115,7 +122,9 @@ function getComputerChoice() {
   const computerChoosesRock = computerChoice >= 1 && computerChoice <= 33;
   const computerChoosesPaper = computerChoice >= 34 && computerChoice <= 66;
   const computerChoosesScissors = computerChoice >= 67 && computerChoice <= 100;
-
+  
+  let computerSelects = "";
+  
   if (computerChoosesRock) {
     computerSelects = "rock";
     return computerSelects;
