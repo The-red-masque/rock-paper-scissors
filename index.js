@@ -32,37 +32,51 @@ document.body.appendChild(resultDiv);
 function decideWinner( computerScore, playerScore ) {
   if (computerScore > playerScore) {
     resultP.textContent = 'The computer has won!';
+    resultDiv.appendChild(resultP);
+    document.body.appendChild(resultDiv);
   } else if (computerScore < playerScore) {
     resultP.textContent = 'The player has won!';
+    resultDiv.appendChild(resultP);
+    document.body.appendChild(resultDiv);
   } else if (computerScore === playerScore) {
     resultP.textContent = 'The player and computer have tied.';
+    resultDiv.appendChild(resultP);
+    document.body.appendChild(resultDiv);
   }
 }
 
-// Function that should run when a tie is true.
+// Function that runs when a tie is true.
 function Tie() {
   const tie = "You tied with the computer.";
-  scoreBoard.textContent = `Round: ${round++} Player score: ${playerScore} Computer score: ${computerScore}`;
+  round++;
+  scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
   resultP.textContent = `Result: ${tie}`;
-  return;
+  resultDiv.appendChild(resultP);
+  resultDiv.appendChild(scoreBoard);
+  document.body.appendChild(resultDiv);
 }
-// Move to inside playRound or playerWin.
-// const declareWinner = decideWinner( computerScore, playerScore );
 
 // Function that triggers when a playerWin is True.
 function playerWin() {
   const playerWin = "You won!";
-  scoreBoard.textContent = `Round: ${round++} Player score: ${playerScore++} Computer score: ${computerScore}`;  // Player score goes up.
+  playerScore++;
+  round++;
+  scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;  // Player score goes up.
   resultP.textContent = `Result: ${playerWin}`;
-  return playerScore };
-
+  resultDiv.appendChild(resultP);
+  resultDiv.appendChild(scoreBoard);
+  document.body.appendChild(resultDiv);
+}
 // Function that triggers when a computerWin is true.
 function computerWin() {
   const computerWin = "You lost to the computer.";
   computerScore++;  // Computer score goes up.
-  scoreBoard.textContent = `Round: ${round++} Player score: ${playerScore} Computer score: ${computerScore++}`;
+  round++;
+  scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
   resultP.textContent = `Result: ${computerWin}`;
-  return { computerScore };
+  resultDiv.appendChild(resultP);
+  resultDiv.appendChild(scoreBoard);
+  document.body.appendChild(resultDiv);
 }
 
 function playRound(humanSelection) {
@@ -80,10 +94,7 @@ function playRound(humanSelection) {
   const playerAndComputerChooseSame = humanSelection === computerSelection;
   let result = "";
   // Checks for tie.
-  if (playerScore >= 5) {
-    decideWinner(computerScore, playerScore);
-  }
-  else if (playerAndComputerChooseSame) {
+  if (playerAndComputerChooseSame) {
     result = Tie();
     return result;
   }
@@ -92,20 +103,35 @@ function playRound(humanSelection) {
     result = computerWin();
     return result;
   } else if (playerChoosesRock && computerChoosesScissors) {
-    result = playerWin();
-    return result;
+      if (playerScore >= 5) {
+      result = decideWinner(computerScore, playerScore);
+      return result;
+    } else {
+      result = playerWin();
+      return result;
+    }
   } else if (playerChoosesPaper && computerChoosesScissors) {
     result = computerWin();
     return result;
   } else if (playerChoosesPaper && computerChoosesRock) {
-    result = playerWin();
-    return result;
+          if (playerScore >= 5) {
+      result = decideWinner(computerScore, playerScore);
+      return result;
+    } else {
+      result = playerWin();
+      return result;
+    }
   } else if (playerChoosesScissors && computerChoosesRock) {
     result = computerWin();
     return result;
   } else if (playerChoosesScissors && computerChoosesPaper) {
-    result = playerWin();
-    return result;
+    if (playerScore >= 5) {
+      result = decideWinner(computerScore, playerScore);
+      return result;
+    } else {
+      result = playerWin();
+      return result;
+    }
   } else {// Error triggered.
     result = console.log("Error in playRound function.");
     return result;
