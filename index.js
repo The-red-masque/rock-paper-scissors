@@ -43,12 +43,23 @@ function decideWinner( computerScore, playerScore ) {
     resultDiv.appendChild(resultP);
     document.body.appendChild(resultDiv);
   }
+
+  // Disables the button.
+  rockBtn.disabled = true;
+  paperBtn.disabled = true;
+  scissorsBtn.disabled = true;
+
+  // Visual effects to show the buttons are disabled.
+  btnDiv.style.opacity = '0.5';
+  btnDiv.style.pointerEvents = 'none';
 }
 
 // Function that runs when a tie is true.
 function Tie() {
   const tie = "You tied with the computer.";
   round++;
+
+  // Update display
   scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
   resultP.textContent = `Result: ${tie}`;
   resultDiv.appendChild(resultP);
@@ -61,17 +72,24 @@ function playerWin() {
   const playerWin = "You won!";
   playerScore++;
   round++;
+
+  // Update display
   scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;  // Player score goes up.
   resultP.textContent = `Result: ${playerWin}`;
   resultDiv.appendChild(resultP);
   resultDiv.appendChild(scoreBoard);
   document.body.appendChild(resultDiv);
+
+  const playerScoreLimit = playerScore >= 5
+  if (playerScoreLimit) {decideWinner(computerScore, playerScore);}
 }
 // Function that triggers when a computerWin is true.
 function computerWin() {
   const computerWin = "You lost to the computer.";
   computerScore++;  // Computer score goes up.
   round++;
+
+  // Update display
   scoreBoard.textContent = `Round: ${round} Player score: ${playerScore} Computer score: ${computerScore}`;
   resultP.textContent = `Result: ${computerWin}`;
   resultDiv.appendChild(resultP);
@@ -102,37 +120,22 @@ function playRound(humanSelection) {
   else if (playerChoosesRock && computerChoosesPaper) {
     result = computerWin();
     return result;
-  } else if (playerChoosesRock && computerChoosesScissors) {
-      if (playerScore >= 5) {
-      result = decideWinner(computerScore, playerScore);
-      return result;
-    } else {
-      result = playerWin();
-      return result;
-    }
-  } else if (playerChoosesPaper && computerChoosesScissors) {
+} else if (playerChoosesRock && computerChoosesScissors) {
+    result = playerWin();
+    return result;
+} else if (playerChoosesPaper && computerChoosesScissors) {
     result = computerWin();
     return result;
-  } else if (playerChoosesPaper && computerChoosesRock) {
-          if (playerScore >= 5) {
-      result = decideWinner(computerScore, playerScore);
-      return result;
-    } else {
+} else if (playerChoosesPaper && computerChoosesRock) {
       result = playerWin();
       return result;
-    }
-  } else if (playerChoosesScissors && computerChoosesRock) {
-    result = computerWin();
-    return result;
-  } else if (playerChoosesScissors && computerChoosesPaper) {
-    if (playerScore >= 5) {
-      result = decideWinner(computerScore, playerScore);
+} else if (playerChoosesScissors && computerChoosesRock) {
+      result = computerWin();
       return result;
-    } else {
+} else if (playerChoosesScissors && computerChoosesPaper) {
       result = playerWin();
       return result;
-    }
-  } else {// Error triggered.
+} else {// Error triggered.
     result = console.log("Error in playRound function.");
     return result;
   }
